@@ -7,6 +7,6 @@ use App\Models\Course;
 class CourseRepository
 {
     static function getAllCourses() {
-        return Course::get();
+        return Course::all();
     }
 }
