@@ -6,15 +6,22 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Resources\CourseResource;
 use App\Repositories\CourseRepository;
+use Illuminate\Support\Facades\Validator;
+
 
 class CourseController extends Controller
 {
+    protected $repository;
+    
+    public function __construct(CourseRepository $courseRepository) {
+        $this->repository = $courseRepository;
+    }
     /**
      * Display a listing of the resource.
      */
-    static function index()
+    public function index()
     {
-        return CourseResource::collection(CourseRepository::getAllCourses());
+        return CourseResource::collection($this->repository->getAllCourses());
     }
 
     /**
@@ -36,9 +43,24 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show($id)
     {
-        //
+        $rules = [
+            'id'=>'required|string|size:36'
+        ];
+
+        $validationFailMessages = [
+            'id.required' => 'No course id was passed.',
+            'id.string' => 'The course id must be a string.',
+            'id.size' => 'The course id must be a uuid containing exactly 36 chars.'
+        ];
+
+        try {
+            Validator::make(['id' => $id], $rules, $validationFailMessages);
+            return new CourseResource($this->repository->getCourse($id));
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        } 
     }
 
     /**
