@@ -7,7 +7,11 @@ use App\Models\Course;
 class CourseRepository
 {
     static function getAllCourses() {
-        return Course::all();
+        try {
+            return Course::all();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     static function getCourse( $id) {
