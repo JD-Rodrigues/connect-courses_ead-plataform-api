@@ -11,6 +11,6 @@ Route::get('/', function() {
     return 'Aqui começa nossa API';
 });
 
-Route::get('/courses', function() {
-    return CourseResource::collection(CourseController::index());
-});
+Route::get('/courses', [CourseController::class, 'index']);
+
+Route::get('/courses/{id}', [CourseController::class, 'show']);
