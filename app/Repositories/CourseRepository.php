@@ -14,7 +14,11 @@ class CourseRepository
         }
     }
 
-    static function getCourse( $id) {
-        return Course::findOrFail($id);
+    static function getCourse( $id) {        
+        try {
+            return Course::findOrFail($id);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }
