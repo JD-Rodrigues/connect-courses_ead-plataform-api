@@ -1,0 +1,13 @@
+Course::factory->create()
+Course->factory->create()
+ls
+User::factory->create()
+User::get()
+User::all()
+User::UserFactory->create()
+User::factory->create()
+User::factory()->create()
+Course->factory()->create()
+Course::factory()->create()
+Course::factory(3)->create()
+exit
