@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\UuidTrait;
+use App\Models\Course;
 
 class Module extends Model
 {
@@ -14,4 +15,7 @@ class Module extends Model
     protected $keyTypes = 'uuid';
     protected $fillable = ['id', 'course_id', 'name'];
 
+    public function course() {
+        $this->belongsTo(Course::class);
+    }
 }

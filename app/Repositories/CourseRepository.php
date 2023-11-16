@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Course;
+use Illuminate\Http\Response;
+
 
 class CourseRepository
 {
