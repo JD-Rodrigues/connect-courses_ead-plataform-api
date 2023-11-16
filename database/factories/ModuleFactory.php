@@ -17,7 +17,8 @@ class ModuleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'course_id' => fake()->uuid()
         ];
     }
 }
