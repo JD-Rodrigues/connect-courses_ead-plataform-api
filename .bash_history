@@ -6,3 +6,9 @@ php artisan migrate:install
 exit
 php artisan migrate:fresh
 exit
+php artisan tinker
+php artisan migrate:fresh
+exit
+ls
+php artisan migrate:fresh
+exit

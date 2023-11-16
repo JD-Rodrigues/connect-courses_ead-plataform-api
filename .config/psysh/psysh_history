@@ -11,3 +11,6 @@ Course->factory()->create()
 Course::factory()->create()
 Course::factory(3)->create()
 exit
+Course::factory()->create()
+Module::factory()->create()
+exit
