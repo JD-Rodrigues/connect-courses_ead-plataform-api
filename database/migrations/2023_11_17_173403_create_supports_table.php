@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('supports', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('user_id')->nullable(false);
+            $table->uuid('lesson_id')->nullable(false);
+            $table->enum('status', ['T', 'S', 'C' ])->default('T');
+            $table->text('description')->nullable(false);
             $table->timestamps();
         });
     }
