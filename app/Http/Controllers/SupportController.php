@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Support;
 use Illuminate\Http\Request;
+use App\Repositories\SupportRepository;
+use App\Http\Resources\SupportResource;
 
 class SupportController extends Controller
 {
+    protected $repository;
+
+    public function __construct(SupportRepository $supportRepository) {
+        $this->repository = $supportRepository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return SupportResource::collection($this->repository->getAllSupports());
     }
 
     /**
