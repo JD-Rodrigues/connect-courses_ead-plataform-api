@@ -20,5 +20,4 @@ class Course extends Model
     public function modules() {
         $this->hasMany(Module::class);
     }
-
 }
