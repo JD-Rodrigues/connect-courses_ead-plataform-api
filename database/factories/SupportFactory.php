@@ -17,7 +17,10 @@ class SupportFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => fake()->uuid(),
+            'lesson_id' => fake()->uuid(),
+            'status' => 'T',
+            'description' => fake()->text()
         ];
     }
 }
