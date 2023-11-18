@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\UuidTrait;
 use App\Models\Module;
+use App\Models\Support;
 
 class Lesson extends Model
 {
@@ -18,5 +19,9 @@ class Lesson extends Model
 
     public function module() {
         $this->belongsTo(Module::class);
+    }
+
+    protected function supports() {
+        return $this->hasMany(Support::class);
     }
 }
