@@ -5,11 +5,12 @@ namespace App\Repositories;
 use App\Models\Support;
 use App\Models\User;
 
+
 class SupportRepository
 {
     public function getAllSupports() {
         try {
-            return $this->getLoggedUser()->supports;
+            return $this->getLoggedUser()->supports()->get();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

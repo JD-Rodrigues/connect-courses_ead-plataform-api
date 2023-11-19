@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\UuidTrait;
 use App\Models\Lesson;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Support extends Model
 {
@@ -24,11 +25,11 @@ class Support extends Model
         'C' => 'Closed'
     ];
 
-    protected function lesson() {
+    protected function lesson(): BelongsTo {
         return $this->belongsTo(Lesson::class);
     }
 
-    protected function user() {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 }
