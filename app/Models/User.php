@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Traits\UuidTrait;
 use App\Models\Support;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -49,7 +49,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];  
 
-    protected function supports() {
+    public function supports(): HasMany
+    {
         return $this->hasMany(Support::class);
     }
 }
