@@ -17,9 +17,9 @@ class SupportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return SupportResource::collection($this->repository->getAllSupports());
+        return SupportResource::collection($this->repository->getAllSupports($request->all()));
     }
 
     /**
