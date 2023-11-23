@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Support;
+use Illuminate\Validation\Rule;
 
 class StoreSupportRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StoreSupportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +21,12 @@ class StoreSupportRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules(Support $support): array
     {
         return [
-            //
+            'status_code' => ['required', Rule::in(array_keys($support->statusOptions))],
+            'lesson_id' => ['required'],
+            'description' => ['required', 'min:10', 'max:10000']
         ];
     }
 }
