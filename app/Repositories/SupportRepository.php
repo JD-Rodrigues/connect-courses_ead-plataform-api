@@ -17,8 +17,8 @@ class SupportRepository
                     $query->where('lesson_id', $filters['lesson_id']);
                 }
                 
-                if (isset($filters['status'])) {
-                    $query->where('status', $filters['status']);
+                if (isset($filters['status_code'])) {
+                    $query->where('status_code', $filters['status_code']);
                 }
                 if (isset($filters['description'])) {
                     $filter = $filters['description'];
@@ -43,5 +43,11 @@ class SupportRepository
 
     private function getLoggedUser() {
         return User::first();
+    }
+
+    public function createNewSupport(array $data) {
+        return $this->getLoggedUser()
+            ->supports()
+            ->create($data);         
     }
 }

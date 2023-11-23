@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable(false);
             $table->uuid('lesson_id')->nullable(false);
-            $table->enum('status', ['T', 'S', 'C' ])->default('T');
+            $table->enum('status_code', ['T', 'S', 'C' ])->default('T');
             $table->text('description')->nullable(false);
             $table->timestamps();
         });

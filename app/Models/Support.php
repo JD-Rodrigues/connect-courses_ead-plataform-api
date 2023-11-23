@@ -17,7 +17,7 @@ class Support extends Model
     protected $keyType = 'uuid';
 
 
-    protected $fillable = ['status', 'description'];
+    protected $fillable = ['status_code', 'description', 'lesson_id'];
 
     public $statusOptions = [
         'T' => 'Under Review; Awaiting Teacher',

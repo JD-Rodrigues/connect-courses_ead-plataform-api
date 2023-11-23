@@ -19,7 +19,7 @@ class SupportFactory extends Factory
         return [
             'user_id' => fake()->uuid(),
             'lesson_id' => fake()->uuid(),
-            'status' => 'T',
+            'status_code' => 'T',
             'description' => fake()->text()
         ];
     }
