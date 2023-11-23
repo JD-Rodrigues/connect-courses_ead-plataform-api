@@ -6,6 +6,7 @@ use App\Models\Support;
 use Illuminate\Http\Request;
 use App\Repositories\SupportRepository;
 use App\Http\Resources\SupportResource;
+use App\Http\Requests\StoreSupportRequest;
 
 class SupportController extends Controller
 {
@@ -25,9 +26,14 @@ class SupportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSupportRequest $request)
     {
-        //
+        try {
+            $support = $this->repository->createNewSupport($request->validated());
+            return $support;
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
     /**
