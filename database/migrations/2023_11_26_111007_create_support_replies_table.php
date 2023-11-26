@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('support_replies', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->uuid('user_id');
-            $table->uuid('support_id');
-            $table->text('description');
+            $table->uuid('id')->primary();
+            $table->uuid('user_id')->nullable(false);
+            $table->uuid('support_id')->nullable(false);
+            $table->text('description')->nullable(false);
             $table->timestamps();
         });
     }
