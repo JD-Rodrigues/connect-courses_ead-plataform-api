@@ -16,21 +16,13 @@ class SupportReplyRepository
         }
     }
 
-    static function getSupport($id) {        
-        try {
-            
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-        }
-    }
-
     private function getLoggedUser() {
         return User::first();
     }
 
-    public function createNewSupport(array $data) {
+    public function createNewSupportReply(array $data) {
         return $this->getLoggedUser()
-            ->supports()
+            ->supportReplies()
             ->create($data);         
     }
 }

@@ -53,4 +53,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Support::class);
     }
+
+    public function supportReplies() {
+        return $this->hasMany(SupportReply::class);
+    }
 }
