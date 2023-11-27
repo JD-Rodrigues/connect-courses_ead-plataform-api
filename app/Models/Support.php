@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\UuidTrait;
 use App\Models\Lesson;
 use App\Models\User;
+use App\Models\SupportReply;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Support extends Model
@@ -31,5 +32,9 @@ class Support extends Model
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
+    }
+
+    public function supportReplies() {
+        return $this->hasMany(SupportReply::class);
     }
 }
