@@ -22,7 +22,9 @@ class SupportReplyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['required', 'uuid'],
+            'support_id' => ['required', 'uuid'],
+            'description' => ['required', 'min:10']
         ];
     }
 }
