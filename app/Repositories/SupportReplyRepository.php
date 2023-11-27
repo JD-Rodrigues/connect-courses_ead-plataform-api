@@ -21,8 +21,12 @@ class SupportReplyRepository
     }
 
     public function createNewSupportReply(array $data) {
-        return $this->getLoggedUser()
+        try {
+            return $this->getLoggedUser()
             ->supportReplies()
-            ->create($data);         
+            ->create($data); 
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }        
     }
 }
