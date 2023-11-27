@@ -17,7 +17,9 @@ class SupportReplyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => fake()->uuid(),
+            'support_id' => fake()->uuid(),
+            'description' => fake()->text()
         ];
     }
 }
