@@ -16,7 +16,11 @@ class SupportRepository
         $this->entity = $model;
     }
 
-    
+    public function getMySupports(array $filters) {
+        $filters['user'] = true;
+
+        return $this->getAllSupports($filters);
+    }
 
     public function getAllSupports(array $filters) {
         try {
