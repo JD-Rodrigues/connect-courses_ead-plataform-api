@@ -25,7 +25,7 @@ class StoreSupportRequest extends FormRequest
     {
         return [
             'status_code' => ['required', Rule::in(array_keys($support->statusOptions))],
-            'lesson_id' => ['required'],
+            'lesson_id' => ['required', 'exists:lessons,id'],
             'description' => ['required', 'min:10', 'max:10000']
         ];
     }
