@@ -17,6 +17,7 @@ class SupportReply extends Model
     public $incrementing = false;
     protected $keyType = 'uuid';
     protected $fillable = ['support_id', 'user_id', 'description'];
+    protected $touches = ['support'];
 
     public function user() {
         return $this->belongsTo(User::class);
