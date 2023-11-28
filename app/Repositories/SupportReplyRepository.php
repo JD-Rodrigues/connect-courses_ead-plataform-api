@@ -10,14 +10,6 @@ use App\Models\Traits\GetAuthUserTrait;
 class SupportReplyRepository
 {
     use GetAuthUserTrait;
-    
-    public function getAllSupportReplies(array $filters) {
-        try {
-            
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-        }
-    }
 
     public function createNewSupportReply(array $data) {
         try {
