@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\SupportReply;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSupportRequest;
+use App\Http\Requests\StoreSupportReplyRequest;
 use App\Repositories\SupportReplyRepository;
 
 class SupportReplyController extends Controller
 {
     private $repository;
 
-    public function __construct(SupportReplyRepository $repository) {
-        $this->repository = $repository;
+    public function __construct(SupportReplyRepository $supportReplyRepository) {
+        $this->repository = $supportReplyRepository;
     }
 
     public function index()
@@ -23,7 +24,7 @@ class SupportReplyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSupportRequest $request)
+    public function store(StoreSupportReplyRequest $request)
     {
         return $this->repository->createNewSupportReply($request->validated());
     }
