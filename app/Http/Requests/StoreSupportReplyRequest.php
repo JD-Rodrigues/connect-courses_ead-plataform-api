@@ -22,8 +22,8 @@ class StoreSupportReplyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'uuid'],
-            'support_id' => ['required', 'uuid'],
+            'user_id' => ['required', 'exists:users,id'],
+            'support_id' => ['required', 'exists:supports,id'],
             'description' => ['required', 'min:10']
         ];
     }
