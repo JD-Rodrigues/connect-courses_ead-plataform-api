@@ -17,6 +17,7 @@ Route::get('/', function() {
 Route::post('/login', [AuthController::class, 'authenticateUser']);
 
 Route::middleware(['auth:sanctum'])->group(function() {
+    Route::get('/me', [AuthController::class, 'getAuthenticatedUser']);
     Route::get('/courses', [CourseController::class, 'index']);
     Route::get('/courses/{id}', [CourseController::class, 'show']);
     Route::get('/courses/{id}/modules', [ModuleController::class, 'index']);
