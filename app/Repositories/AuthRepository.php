@@ -43,4 +43,12 @@ class AuthRepository
             return $th;
         }
     }
+
+    public function logout() {
+        auth()->user()->tokens()->delete();
+
+        return response()->json([
+            'logout'=>'success'
+        ]);
+    }
 }
