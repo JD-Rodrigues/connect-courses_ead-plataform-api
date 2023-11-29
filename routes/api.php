@@ -14,7 +14,7 @@ Route::get('/', function() {
     return 'Aqui começa nossa API';
 });
 
-Route::post('/login', [AuthController::class, 'auth']);
+Route::post('/login', [AuthController::class, 'authenticateUser']);
 
 Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/courses', [CourseController::class, 'index']);
@@ -26,5 +26,5 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/my-supports', [SupportController::class, 'showMySupports']);
     Route::post('/supports', [SupportController::class, 'store']);
     Route::post('/support-replies', [SupportReplyController::class, 'store']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logoutUser']);
 }); 
