@@ -18,8 +18,8 @@ class AuthRepository
         $this->entity = $model;
     }
 
-    public function getAuthUser(array $filters) {
-        
+    public function getAuthUser() {
+        return $this->getLoggedUser();
     }
 
     public function authenticate(array $credentials) {
