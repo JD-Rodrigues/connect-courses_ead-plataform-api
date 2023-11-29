@@ -5,33 +5,22 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use App\Repositories\AuthRepository;
 
 class AuthController extends Controller
 {
-    public static function auth(AuthRequest $request) {
-        $user = User::where('email', $request->email)->first();
+    private $repository;
 
-        if(!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
-        }
-
-        $user->tokens()->delete();
-
-        return response()->json([
-            'token'=> $user->createToken($request->password)->plainTextToken
-        ]);
+    public function __construct(AuthRepository $repository){
+        $this->repository = $repository;
     }
 
-    public static function logout() {
-        auth()->user()->tokens()->delete();
+    public function authenticateUser(AuthRequest $request) {
+        return $this->repository->authenticate($request->validated());
+    }
 
-        return response()->json([
-            'logout'=>'success'
-        ]);
+    public function logoutUser() {
+        return $this->repository->logout();
     }
 
     
