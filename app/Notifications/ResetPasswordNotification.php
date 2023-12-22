@@ -14,10 +14,8 @@ class ResetPasswordNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(readonly string $token)
+    {}
 
     /**
      * Get the notification's delivery channels.
@@ -35,9 +33,14 @@ class ResetPasswordNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Redefinição de senha')
+                    ->greeting('Olá!')
+                    ->line('Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para sua conta.')
+                    ->action('Redefinir senha', url("/?token=$this->token"))
+                    ->line('O link de redefinição de senha expirará em 60 minutos.')
+                    ->line('Se você não solicitou este procedimento, desconsidere este e-mail.')
+                    ->line('Atenciosamente,')
+                    ->salutation('Connect Courses');
     }
 
     /**
