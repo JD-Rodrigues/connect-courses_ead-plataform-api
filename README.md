@@ -34,7 +34,7 @@ Em andamento. Na etapa de testes de integração.
 
 <b>Nginx</b> - Servidor web que interage com os diferentes serviços da aplicação, presentes em cada contêiner.
 
-## Como rodar a aplicação:
+## Como rodar a aplicação localmente:
 ### Requisitos:
 - Ter o Docker instalado: https://docs.docker.com/engine/install/
 - Ter o Docker Compose instalado: https://docs.docker.com/compose/install/
