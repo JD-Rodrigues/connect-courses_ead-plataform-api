@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
 Route::get('/', function() {
-    return 'Aqui começa nossa API';
+    return 'Esta é a rota base da API Connect Courses!';
 });
 
 Route::post('/login', [AuthController::class, 'authenticateUser']);
