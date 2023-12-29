@@ -33,7 +33,14 @@ class AuthTest extends TestCase
         );
 
         $response->assertJsonStructure(['token']);
-        $response->assertStatus(200);        
+        $response->assertStatus(200);       
         
+    }
+
+    public function test_unauthorized_logout_no_authenticated(): void
+    {
+        $response = $this->postJson('/logout', []);
+
+        $response->assertStatus(401);
     }
 }
