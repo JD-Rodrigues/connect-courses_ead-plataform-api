@@ -56,4 +56,11 @@ class AuthTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_get_me_route_without_authentication(): void
+    {
+        $response = $this->getJson("/me");
+
+        $response->assertStatus(401);
+    }
 }
