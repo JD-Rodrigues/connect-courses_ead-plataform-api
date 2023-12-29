@@ -43,4 +43,17 @@ class AuthTest extends TestCase
 
         $response->assertStatus(401);
     }
+
+    public function test_logout(): void
+    {
+        $user = User::factory()->create();
+
+        $token =  $user->createToken('password')->plainTextToken;
+        
+        $response = $this->postJson('/logout', [], [
+            'Authorization' => "Bearer {$token}"
+        ]);
+
+        $response->assertStatus(200);
+    }
 }
