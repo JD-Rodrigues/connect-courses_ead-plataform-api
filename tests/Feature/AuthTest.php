@@ -77,4 +77,14 @@ class AuthTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_forgot_password_route(): void
+    {
+        $response = $this->postJson(
+            "/forgot-password", 
+            ["email" => "algumemail@gmail.com"]
+        );
+
+        $response->assertStatus(200);
+    }
+    
 }
