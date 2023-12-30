@@ -19,5 +19,12 @@ class SupportTest extends TestCase
         $response->assertStatus(401);
     }
 
+    public function test_get_supports_with_authentication_succeed(): void
+    {
+        $response = $this->getJson('/supports', $this->createAuthHeader());
+
+        $response->assertStatus(200);
+    }
+
     
 }
