@@ -91,5 +91,19 @@ class SupportTest extends TestCase
         $response->assertStatus(401);
     }
 
+    public function test_post_support_repply_with_authentication_succeed(): void
+    {
+        $support = Support::factory()->create();
+
+        $supportData = [
+            "support_id" => $support->id,
+            "description" => "This is a answer to support!"
+        ];
+
+        $response = $this->postJson('/support-replies', $supportData, $this->createAuthHeader());
+
+        $response->assertStatus(201);
+    }
+
     
 }
