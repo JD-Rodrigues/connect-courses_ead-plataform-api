@@ -77,5 +77,19 @@ class SupportTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_post_support_repply_without_authentication_fails(): void
+    {
+        $support = Support::factory()->create();
+
+        $supportData = [
+            "support_id" => $support->id,
+            "description" => "This is a answer to support!"
+        ];
+
+        $response = $this->postJson('/support-replies', $supportData, []);
+
+        $response->assertStatus(401);
+    }
+
     
 }
