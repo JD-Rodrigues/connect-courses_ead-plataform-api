@@ -16,4 +16,11 @@ class CourseTest extends TestCase
 
         $response->assertStatus(401);
     }
+
+    public function test_get_courses_with_authentication_succeed(): void
+    {
+        $response = $this->getJson('/courses', $this->createAuthHeader());
+
+        $response->assertStatus(200);
+    }   
 }
