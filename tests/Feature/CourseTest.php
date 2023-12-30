@@ -33,4 +33,13 @@ class CourseTest extends TestCase
 
         $response->assertStatus(401);
     }
+
+    public function test_get_a_course_with_authentication_succeed(): void
+    {
+        $course = Course::factory()->create();
+
+        $response = $this->getJson("/courses/{$course->id}", $this->createAuthHeader());
+
+        $response->assertStatus(200);
+    }   
 }
