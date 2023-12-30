@@ -63,5 +63,12 @@ class SupportTest extends TestCase
         $response->assertStatus(422);
     }
 
+    public function test_get_my_supports_without_authentication_fails(): void
+    {
+        $response = $this->getJson('/my-supports');
+
+        $response->assertStatus(401);
+    }
+
     
 }
