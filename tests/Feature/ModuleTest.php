@@ -24,5 +24,15 @@ class ModuleTest extends TestCase
 
         $response->assertStatus(401);
     }   
- 
+    public function test_get_a_module_with_authentication_succeed(): void
+    {
+        $course = Course::factory()->create();
+        $module = Module::factory()->create([
+            'course_id' => $course->id
+        ]);
+
+        $response = $this->getJson("/courses/{$course->id}/modules", $this->createAuthHeader());
+
+        $response->assertStatus(200);
+    }   
 }
