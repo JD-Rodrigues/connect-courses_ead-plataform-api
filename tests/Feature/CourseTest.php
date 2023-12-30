@@ -4,17 +4,16 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Feature\Traits\AuthUtilsTrait;
 use Tests\TestCase;
 
 class CourseTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
+    use AuthUtilsTrait;
+    public function test_get_courses_without_authentication_fails(): void
     {
-        $response = $this->get('/');
+        $response = $this->getJson('/courses');
 
-        $response->assertStatus(200);
+        $response->assertStatus(401);
     }
 }

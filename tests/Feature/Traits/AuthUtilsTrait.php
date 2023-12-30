@@ -6,7 +6,7 @@ use App\Models\User;
 trait AuthUtilsTrait {
     public function createAuthHeader() {
         $user = User::factory()->create();
-
+        
         $token =  $user->createToken('password')->plainTextToken;
 
         return [
