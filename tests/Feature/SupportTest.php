@@ -26,5 +26,20 @@ class SupportTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_post_supports_without_authentication_fails(): void
+    {
+        $lesson = Lesson::factory()->create();
+
+        $supportData = [
+            "status_code" => "T",
+            "lesson_id" => $lesson->id,
+            "description" => "Help-me! I am stucked!"
+        ];
+
+        $response = $this->postJson('/supports', $supportData, []);
+
+        $response->assertStatus(401);
+    }
+
     
 }
