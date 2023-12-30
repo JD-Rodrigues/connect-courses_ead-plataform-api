@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Course;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\Feature\Traits\AuthUtilsTrait;
@@ -23,4 +24,13 @@ class CourseTest extends TestCase
 
         $response->assertStatus(200);
     }   
+
+    public function test_get_a_course_without_authentication_fails(): void
+    {
+        $course = Course::factory()->create();
+
+        $response = $this->getJson("/courses/{$course->id}", []);
+
+        $response->assertStatus(401);
+    }
 }
