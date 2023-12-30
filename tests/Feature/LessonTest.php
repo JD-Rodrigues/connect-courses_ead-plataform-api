@@ -23,4 +23,12 @@ class LessonTest extends TestCase
         $response->assertStatus(401);
     }
 
+    public function test_get_a_lesson_with_authentication_succeed(): void
+    {
+        $lesson = Lesson::factory()->create();
+
+        $response = $this->getJson("/lessons/{$lesson->id}", $this->createAuthHeader());
+
+        $response->assertStatus(200);
+    }
 }
