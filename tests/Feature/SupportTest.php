@@ -56,5 +56,12 @@ class SupportTest extends TestCase
         $response->assertStatus(201);
     }
 
+    public function test_post_supports_with_invalid_data_fails(): void
+    {        
+        $response = $this->postJson('/supports', [], $this->createAuthHeader());
+
+        $response->assertStatus(422);
+    }
+
     
 }
