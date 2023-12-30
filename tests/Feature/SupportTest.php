@@ -105,5 +105,10 @@ class SupportTest extends TestCase
         $response->assertStatus(201);
     }
 
-    
+    public function test_post_support_repply_with_invalid_data_fails(): void
+    {        
+        $response = $this->postJson('/support-replies', [], $this->createAuthHeader());
+
+        $response->assertStatus(422);
+    }
 }
