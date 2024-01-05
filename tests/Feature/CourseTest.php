@@ -62,7 +62,16 @@ class CourseTest extends TestCase
         $response = $this->getJson("/courses/{$course->id}", $this->createAuthHeader());
 
         $response->assertStatus(200);
-        
+        $response->assertJson(
+            [
+                "data"=> [
+                    "id"=>$course->id,
+                    "name"=>$course->name,
+                    "description"=>$course->description,
+                    "image"=>$course->image
+                ]
+            ]
+        );
                     
     }   
 }
