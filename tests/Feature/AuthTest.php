@@ -27,10 +27,9 @@ class AuthTest extends TestCase
             'email' => $user->email,
             'password' => 'password',
         ]);
-        // dd($user->email);
+
         $response->assertJsonStructure(['token']);
-        $response->assertStatus(200);       
-        
+        $response->assertStatus(200);               
     }
 
     public function test_logout_without_authentication_fails(): void
@@ -43,8 +42,10 @@ class AuthTest extends TestCase
     public function test_logout_with_authentication_succeed(): void
     {            
         $response = $this->postJson('/logout', [], $this->createAuthHeader());
-
+       
         $response->assertStatus(200);
+        $response->assertJson(['logout'=>'success']);
+        
     }
 
     public function test_get_me_without_authentication_fails(): void
@@ -61,6 +62,19 @@ class AuthTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_get_me_structure_response(): void
+    {        
+        $response = $this->getJson('/me', $this->createAuthHeader());
+
+        $response->assertJsonStructure([
+            'data'=> [
+                'id',
+                'name',
+                'email'
+            ]
+        ]);
+    }
+
     public function test_forgot_password_route_works(): void
     {
         $response = $this->postJson(
@@ -68,7 +82,7 @@ class AuthTest extends TestCase
             ["email" => "algumemail@gmail.com"]
         );
 
-        $response->assertStatus(200);
+        $response->assertStatus(422);
     }
     
 }

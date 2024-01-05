@@ -36,14 +36,13 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
 Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
- 
     $status = Password::sendResetLink(
         $request->only('email')
     );
     
     return $status === Password::RESET_LINK_SENT
                 ? "Link de redefinição de senha enviado para o e-mail: ". $request->input('email'). "."
-                : "Houve um erro: $status";
+                : response(["Houve um erro"=>$status], 422);
 })->middleware('guest')->name('password.reset');
 
 Route::post('/reset-password', function (Request $request) {
@@ -68,5 +67,5 @@ Route::post('/reset-password', function (Request $request) {
  
     return $status === Password::PASSWORD_RESET
                 ? "Senha alterada com sucesso!"
-                : "Houve um erro: $status";
+                : response(["Houve um erro"=>$status], 422);
 })->middleware('guest')->name('password.update');
