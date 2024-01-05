@@ -62,7 +62,7 @@ class AuthTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_get_me_structure_response(): void
+    public function test_get_me_structure_response_matches(): void
     {        
         $response = $this->getJson('/me', $this->createAuthHeader());
 
@@ -75,7 +75,7 @@ class AuthTest extends TestCase
         ]);
     }
 
-    public function test_forgot_password_route_works(): void
+    public function test_forgot_password_route_fails(): void
     {
         $response = $this->postJson(
             "/forgot-password", 
