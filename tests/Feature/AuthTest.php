@@ -83,6 +83,7 @@ class AuthTest extends TestCase
         );
 
         $response->assertStatus(422);
+        
         $response->assertJson(["Houve um erro" => "passwords.user"]);
     }
     
@@ -98,6 +99,18 @@ class AuthTest extends TestCase
         $response->assertStatus(200)
         
         ->assertJson(["Link de redefinição de senha enviado para o e-mail: " . $user->email . "."]);
+    }
+
+    public function test_reset_password_invalid_data_fails(): void
+    {
+        $response = $this->postJson(
+            "/forgot-password", 
+            ["email" => "algumemail@gmail.com"]
+        );
+
+        $response->assertStatus(422);
+        
+        $response->assertJson(["Houve um erro" => "passwords.user"]);
     }
 
    
