@@ -41,7 +41,7 @@ Route::post('/forgot-password', function (Request $request) {
     );
     
     return $status === Password::RESET_LINK_SENT
-                ? response("Link de redefinição de senha enviado para o e-mail: ". $request->input('email'). ".", 200)
+                ? response(["Link de redefinição de senha enviado para o e-mail: ". $request->input('email'). "."], 200)
                 : response(["Houve um erro"=>$status], 422);
 })->middleware('guest')->name('password.reset');
 
