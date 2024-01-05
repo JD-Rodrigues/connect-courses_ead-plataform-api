@@ -25,10 +25,23 @@ class LessonTest extends TestCase
 
     public function test_get_a_lesson_with_authentication_succeed(): void
     {
-        $lesson = Lesson::factory()->create();
+        $module = Module::factory()->create();
+        $lesson = Lesson::factory()->create(['module_id'=> $module->id]);
 
         $response = $this->getJson("/lessons/{$lesson->id}", $this->createAuthHeader());
 
         $response->assertStatus(200);
+        $response->assertJson(
+            [
+                "data"=>[                    
+                    "id"=> $lesson->id,
+                    "module_id"=> $module->id,
+                    "name"=> $lesson->name,
+                    "description"=> $lesson->description,
+                    "video"=> $lesson->video,
+                    "url"=> $lesson->url                    
+                ]
+            ]
+                    );
     }
 }

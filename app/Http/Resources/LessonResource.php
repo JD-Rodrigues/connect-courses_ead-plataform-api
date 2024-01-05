@@ -18,12 +18,12 @@ class LessonResource extends JsonResource
         
 
         return [
-            'id' => $this->id,
-            'module_id' => $this->module_id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'video' => $this->video,
-            'url' => $this->url,        
+            "id" => $this->id,
+            "module_id" => $this->module_id,
+            "name" => $this->name,
+            "description" => $this->description,
+            "video" => $this->video,
+            "url" => $this->url,        
         ];
     }
 }
