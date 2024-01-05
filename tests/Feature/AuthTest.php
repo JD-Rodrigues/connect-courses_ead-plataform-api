@@ -75,7 +75,7 @@ class AuthTest extends TestCase
         ]);
     }
 
-    public function test_forgot_password_route_fails(): void
+    public function test_forgot_password_invalid_email_fails(): void
     {
         $response = $this->postJson(
             "/forgot-password", 
@@ -85,4 +85,17 @@ class AuthTest extends TestCase
         $response->assertStatus(422);
     }
     
+    public function test_forgot_password_valid_email_succeed(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->postJson(
+            "/forgot-password", 
+            ["email" => $user->email]
+        );
+
+        $response->assertStatus(200)
+        
+        ->assertJson(["Link de redefinição de senha enviado para o e-mail: " . $user->email . "."]);
+    }
 }
