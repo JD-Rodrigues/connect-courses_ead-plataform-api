@@ -33,5 +33,16 @@ class ModuleTest extends TestCase
         $response = $this->getJson("/courses/{$course->id}/modules", $this->createAuthHeader());
 
         $response->assertStatus(200);
-    }   
+        $response->assertJson(
+            [
+                "data"=>[
+                    [
+                        "id"=> $module->id,
+                        "name"=> $module->name,
+                        "course_id"=> $course->id,
+                    ]
+                ]
+            ]
+            );
+        }   
 }
