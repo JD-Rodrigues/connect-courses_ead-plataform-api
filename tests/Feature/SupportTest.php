@@ -151,7 +151,7 @@ class SupportTest extends TestCase
         $response = $this->postJson('/support-replies', $supportData, $this->createAuthHeader());
 
         $response->assertStatus(201);
-        
+        $response->assertJson($supportData);
         $this->assertCount(1, SupportReply::all());
     }
 
