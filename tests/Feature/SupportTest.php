@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Lesson;
 use App\Models\Support;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\Feature\Traits\AuthUtilsTrait;
@@ -69,6 +70,7 @@ class SupportTest extends TestCase
 
         $response->assertStatus(201);
         $response->assertJson($supportData);
+        $this->assertCount(1, Support::all());
     }
 
     public function test_post_supports_with_invalid_data_fails(): void
@@ -87,9 +89,39 @@ class SupportTest extends TestCase
 
     public function test_get_my_supports_with_authentication_succeed(): void
     {
-        $response = $this->getJson('/my-supports', $this->createAuthHeader());
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
+        $lesson = Lesson::factory()->create();
+        
+        auth()->user()->supports()->create(
+            [
+                "status_code"=>"T",
+                "lesson_id"=> $lesson->id,
+                "description"=> "Blá, blá. blá!"
+            ]
+        );
+
+
+        $response = $this->getJson('/my-supports');
+        
         $response->assertStatus(200);
+        $response->assertJsonStructure(
+            [
+               "data"=> [
+                    [
+                        'id',
+                        'user_id',
+                        'lesson_id',
+                        'status_code',
+                        'status',
+                        'description',
+                    ]
+                ]                
+            ]
+        );
+
+        $this->assertCount(1, auth()->user()->supports);
     }
 
     public function test_post_support_repply_without_authentication_fails(): void
