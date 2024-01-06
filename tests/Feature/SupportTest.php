@@ -21,9 +21,23 @@ class SupportTest extends TestCase
 
     public function test_get_supports_with_authentication_succeed(): void
     {
+        $support = Support::factory(Support::class)->create();
+        
         $response = $this->getJson('/supports', $this->createAuthHeader());
-
+    
         $response->assertStatus(200);
+        $response->assertJson([
+            "data"=>[
+                [
+                    "id"=> $support->id,
+                    "user_id" => $support->user_id,
+                    "lesson_id" => $support->lesson_id,
+                    "status_code" => $support->status_code,
+                    "status" => $support->statusOptions[$support->status_code],
+                    "description" => $support->description
+                ]
+            ]
+                ]);
     }
 
     public function test_post_supports_without_authentication_fails(): void
@@ -54,6 +68,7 @@ class SupportTest extends TestCase
         $response = $this->postJson('/supports', $supportData, $this->createAuthHeader());
 
         $response->assertStatus(201);
+        $response->assertJson($supportData);
     }
 
     public function test_post_supports_with_invalid_data_fails(): void
