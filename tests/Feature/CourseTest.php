@@ -24,8 +24,7 @@ class CourseTest extends TestCase
 
         $response = $this->getJson('/courses', $this->createAuthHeader());
         
-        $response->assertStatus(200);
-        $this->assertCount(2,$response->json()['data']);
+        $response->assertStatus(200);        
         $response->assertJson(
             [
                 "data"=>[
@@ -43,7 +42,8 @@ class CourseTest extends TestCase
                     ]
                 ]
             ]
-                );
+            );
+            $this->assertCount(2,$response->json()['data']);
     }   
 
     public function test_get_a_course_without_authentication_fails(): void

@@ -62,15 +62,18 @@ class AuthTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_get_me_structure_response_matches(): void
+    public function test_get_me_content_response_matches(): void
     {        
-        $response = $this->getJson('/me', $this->createAuthHeader());
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        
+        $response = $this->getJson('/me');
 
-        $response->assertJsonStructure([
+        $response->assertJson([
             'data'=> [
-                'id',
-                'name',
-                'email'
+                'id'=>$user->id,
+                'name'=>$user->name,
+                'email'=>$user->email
             ]
         ]);
     }
