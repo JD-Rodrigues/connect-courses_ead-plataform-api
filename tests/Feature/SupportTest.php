@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Lesson;
 use App\Models\Support;
+use App\Models\SupportReply;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -150,6 +151,8 @@ class SupportTest extends TestCase
         $response = $this->postJson('/support-replies', $supportData, $this->createAuthHeader());
 
         $response->assertStatus(201);
+        
+        $this->assertCount(1, SupportReply::all());
     }
 
     public function test_post_support_repply_with_invalid_data_fails(): void
