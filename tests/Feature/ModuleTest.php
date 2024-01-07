@@ -29,6 +29,7 @@ class ModuleTest extends TestCase
         $module = Module::factory()->create([
             'course_id' => $course->id
         ]);
+        Module::factory(3)->create();
 
         $response = $this->getJson("/courses/{$course->id}/modules", $this->createAuthHeader());
 

@@ -58,6 +58,7 @@ class CourseTest extends TestCase
     public function test_get_a_course_with_authentication_succeed(): void
     {
         $course = Course::factory()->create();
+        Course::factory(3)->create();
 
         $response = $this->getJson("/courses/{$course->id}", $this->createAuthHeader());
 

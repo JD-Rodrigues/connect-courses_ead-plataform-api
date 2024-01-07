@@ -27,6 +27,7 @@ class LessonTest extends TestCase
     {
         $module = Module::factory()->create();
         $lesson = Lesson::factory()->create(['module_id'=> $module->id]);
+        Lesson::factory(3)->create();
 
         $response = $this->getJson("/lessons/{$lesson->id}", $this->createAuthHeader());
 
@@ -42,6 +43,7 @@ class LessonTest extends TestCase
                     "url"=> $lesson->url                    
                 ]
             ]
-                    );
+        );
     }
+    
 }
