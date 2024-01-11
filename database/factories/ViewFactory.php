@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\View;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,7 +15,8 @@ class ViewFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    
+     public function definition(): array
     {
         return [
             'user_id'=> fake()->uuid(),
