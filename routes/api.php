@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ViewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ModuleController;
@@ -31,6 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/my-supports', [SupportController::class, 'showMySupports']);
     Route::post('/supports', [SupportController::class, 'store']);
     Route::post('/support-replies', [SupportReplyController::class, 'store']);
+    Route::post('/views', [ViewController::class, 'create']);
     Route::post('/logout', [AuthController::class, 'logoutUser']);
 }); 
 
