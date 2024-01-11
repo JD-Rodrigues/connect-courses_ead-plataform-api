@@ -58,9 +58,15 @@ class User extends Authenticatable
     public function supportReplies() {
         return $this->hasMany(SupportReply::class);
     }
+
+    public function views() {
+        return $this->hasMany(View::class);
+    }
     
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    
 }

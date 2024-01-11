@@ -24,4 +24,8 @@ class Lesson extends Model
     protected function supports() {
         return $this->hasMany(Support::class);
     }
+
+    public function views() {
+        return $this->hasMany(View::class);
+    }
 }
