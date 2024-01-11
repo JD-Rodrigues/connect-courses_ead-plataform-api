@@ -105,6 +105,30 @@ class SupportTest extends TestCase
         ]);
     }
 
+    public function test_filter_supports_by_user(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $support = Support::factory()->create(['user_id'=> $user->id]);
+        Support::factory(3)->create();
+        
+        $response = $this->getJson("/supports?user={$user->id}", $this->createAuthHeader());
+        $response->assertStatus(200);
+        $response->assertJson([
+            "data"=>[
+                [
+                    "id"=> $support->id,
+                    "user_id" => $user->id,
+                    "lesson_id" => $support->lesson_id,
+                    "status_code" => $support->status_code,
+                    "status" => $support->statusOptions[$support->status_code],
+                    "description" => $support->description
+                ]
+            ]
+        ]);
+    }
+
     public function test_post_supports_without_authentication_fails(): void
     {
         $lesson = Lesson::factory()->create();
