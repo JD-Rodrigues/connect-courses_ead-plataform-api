@@ -40,5 +40,11 @@ class SupportReplyTest extends TestCase
         ]);
     }
 
-    
+    public function test_post_support_reply_with_invalid_data_fails(): void
+    {
+        
+        $response = $this->post('/support-replies',[], $this->createAuthHeader());
+        
+        $response->assertStatus(302);
+    }
 }
