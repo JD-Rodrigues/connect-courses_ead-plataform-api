@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/my-supports', [SupportController::class, 'showMySupports']);
     Route::post('/supports', [SupportController::class, 'store']);
     Route::post('/support-replies', [SupportReplyController::class, 'store']);
-    Route::post('/views', [ViewController::class, 'create']);
+    Route::post('/views', [ViewController::class, 'viewed']);
     Route::post('/logout', [AuthController::class, 'logoutUser']);
 }); 
 
