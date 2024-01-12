@@ -24,7 +24,7 @@ class ViewController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(CreateViewRequest $request)
+    public function viewed(CreateViewRequest $request)
     {
         return $this->repository->createNewView($request->validated());
     }
