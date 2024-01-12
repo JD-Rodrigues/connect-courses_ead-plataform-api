@@ -22,8 +22,8 @@ class CreateViewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'=>'required|uuid|exists:users,id',
-            'lesson_id'=>'required|uuid|exists:lessons, id'
+            'user_id'=>'uuid|exists:users,id',
+            'lesson_id'=>'required|uuid|exists:lessons,id'
         ];
     }
 }
