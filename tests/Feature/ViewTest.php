@@ -53,4 +53,10 @@ class ViewTest extends TestCase
 
     }
 
+    public function test_mark_view_with_invalid_data_fails(): void
+    {
+        $response = $this->post('/views',[],$this->createAuthHeader());
+
+        $response->assertStatus(422);
+    }
 }
