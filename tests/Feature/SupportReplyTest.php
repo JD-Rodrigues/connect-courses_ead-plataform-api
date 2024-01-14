@@ -31,7 +31,6 @@ class SupportReplyTest extends TestCase
         );
 
         $supportReply = SupportReply::first();
-        // dd($response);
         
         $response->assertStatus(201);
         $response->assertJson([
@@ -44,6 +43,6 @@ class SupportReplyTest extends TestCase
     {
         $response = $this->post('/support-replies',[], $this->createAuthHeader());
         
-        $response->assertStatus(302);
+        $response->assertStatus(422);
     }
 }
