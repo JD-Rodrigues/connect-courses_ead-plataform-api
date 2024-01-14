@@ -22,7 +22,7 @@ class CreateViewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'=>'uuid|exists:users,id',
+            'user_id'=>'uuid',
             'lesson_id'=>'required|uuid|exists:lessons,id'
         ];
     }
