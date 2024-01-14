@@ -10,7 +10,8 @@ trait AuthUtilsTrait {
         $token =  $user->createToken('password')->plainTextToken;
 
         return [
-            'Authorization' => "Bearer {$token}"
+            'Authorization' => "Bearer {$token}",
+            'Accept' => 'Application/json'
         ];
     }
 }
